@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pkg:package xmlns:pkg="http://www.seastreet.com/Genesys/package">
+  <name>helloworld</name>
+  <version>2.0</version>
+  <description></description>
+  <tags>
+    <tag>Patch=0</tag>
+  </tags>
+  <dependencies>
+    <dependency>genesysCore/1.0</dependency>
+    <dependency>StratOS/2.0</dependency>
+  </dependencies>
+</pkg:package>

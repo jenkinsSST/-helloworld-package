@@ -1,0 +1,17 @@
+{
+  "ecmaVersion": 5,
+  "plugins": {
+    "guess-types": {
+      
+    },
+    "jshint": {
+      "configFile": "C:\\gitRepos\\jira-resource-driver\\jiraObjectives\\.jshintrc"
+    },
+    "outline": {
+      
+    }
+  },
+  "libs": [
+    "ecma5"
+  ]
+}

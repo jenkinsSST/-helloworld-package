@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pkg:package xmlns:pkg="http://www.seastreet.com/Genesys/package">
+  <name>jiraObjectives</name>
+<<<<<<< HEAD:jiraObjectives/package.xml
+  <version>2.0.0</version>
+=======
+  <version>1.0.1-test</version>
+>>>>>>> release-1.0.0:jiraObjectivePackage/package.xml
+  <description></description>
+  <tags/>
+  <dependencies>
+    <dependency>genesysCore/1.0</dependency>
+    <dependency>StratOS/2.0</dependency>
+  </dependencies>
+</pkg:package>

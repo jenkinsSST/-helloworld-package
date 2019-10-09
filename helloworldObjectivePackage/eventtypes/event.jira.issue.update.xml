@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evt:eventType xmlns:evt="http://www.seastreet.com/Genesys/eventType">
+  <name>event.jira.issue.update</name>
+  <description></description>
+  <tags/>
+  <properties>
+    <property>
+      <name>changedProperties</name>
+      <type>genesysCore/1.0/map</type>
+    </property>
+  </properties>
+</evt:eventType>

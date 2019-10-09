@@ -1,0 +1,36 @@
+<!DOCTYPE configuration>
+
+
+
+
+<!-- <!DOCTYPE configuration>  -->
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+
+<configuration scan="true" scanPeriod="5 seconds">
+  <contextName>Tests</contextName>
+  <jmxConfigurator/>
+ 
+  <!-- Send results to console in concise format -->
+
+   <appender name="CONSOLERESULTS" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+     <pattern> %d{"MMM dd yyyy HH:mm:ss,SSS"}  %msg%n</pattern>
+     </encoder>
+  </appender>
+
+  <logger name="com.seastreetinc.test.objective.dev.helpers.event" level="TRACE" />
+  <logger name="com.seastreetinc.test.environment.ExecutionEnvironment" level="TRACE" />
+
+  <root level="ERROR">
+    <appender-ref ref="CONSOLERESULTS"/>
+  </root>
+  
+</configuration>
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prop:propertyType xmlns:prop="http://www.seastreet.com/Genesys/propertyType">
+  <name>json</name>
+  <description>A property type that validates its value as legal JSON.</description>
+  <validation><![CDATA[VSUL.log("JSON Validator");
+
+VSUL.log("value = " + value);
+
+try{
+	var json = JSON.parse(value);
+	return json;
+} catch (e) {
+	throw 'Passed in value is not valid JSON';
+}
+]]></validation>
+  <tags/>
+  <attributes/>
+</prop:propertyType>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<dep:dependencyPath xmlns:dep="http://www.seastreet.com/Genesys/dependencyPath">
+  <dependencyPathEntry>
+    <packageName>StratOS/2.0</packageName>
+    <path>/StratOS2.0</path>
+    <type>inWorkspace</type>
+  </dependencyPathEntry>
+  <dependencyPathEntry>
+    <packageName>genesysCore/1.0</packageName>
+    <path>/genesysCore1.0</path>
+    <type>inWorkspace</type>
+  </dependencyPathEntry>
+</dep:dependencyPath>

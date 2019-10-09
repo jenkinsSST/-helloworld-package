@@ -1,0 +1,11 @@
+{
+    "project" : {
+        "key" : "TP"
+    },
+    "issuetype" : {
+        "name" : "Task"
+    },
+    "summary" : "Task created via createIssuePositive",
+    "reporter" : {"name" : "admin"},
+    "assignee" : {"name" : "admin"}
+}

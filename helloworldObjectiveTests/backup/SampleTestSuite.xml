@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SampleTestSuite" verbose="2" >	 
+    <test name="TestSampleResourceDriver" >
+    	<classes>
+    		<class name="com.seastreet.test.sample.TestSampleResourceDriver" />
+    	</classes>
+    </test>
+    
+</suite>

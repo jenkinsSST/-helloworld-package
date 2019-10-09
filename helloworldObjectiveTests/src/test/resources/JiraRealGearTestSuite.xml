@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="JiraTestSuite" verbose="2" >	 
+    <test name="TestJira" >
+		<parameter name="environment" value="usecase"/>
+
+<!-- Installation-specific Jira issue schema name/values -->		
+    	<classes>
+           <!--  <class name="com.seastreetinc.test.jira.TestJiraIssue" /> 
+	   <class name="com.seastreetinc.test.jira.TestJiraDriver" /> -->	
+    	</classes>
+    </test>
+    
+</suite>

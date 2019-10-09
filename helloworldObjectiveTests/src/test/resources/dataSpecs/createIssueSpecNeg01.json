@@ -1,0 +1,9 @@
+{
+    "project" : {
+        "key" : "TP"
+    },
+    "issuetype" : {
+        "name" : "Task"
+    },
+    "reporter" : {"name" : "admin"}
+}

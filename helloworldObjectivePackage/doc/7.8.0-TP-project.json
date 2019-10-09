@@ -1,0 +1,118 @@
+{
+   "expand":"description,lead,url,projectKeys",
+   "self":"http://10.70.0.75:8080/rest/api/2/project/10000",
+   "id":"10000",
+   "key":"TP",
+   "description":"",
+   "lead":{
+      "self":"http://10.70.0.75:8080/rest/api/2/user?username=admin",
+      "key":"admin",
+      "name":"admin",
+      "avatarUrls":{
+         "48x48":"https://www.gravatar.com/avatar/f9c38521a0acd385c7a19328022310e9?d=mm&s=48",
+         "24x24":"https://www.gravatar.com/avatar/f9c38521a0acd385c7a19328022310e9?d=mm&s=24",
+         "16x16":"https://www.gravatar.com/avatar/f9c38521a0acd385c7a19328022310e9?d=mm&s=16",
+         "32x32":"https://www.gravatar.com/avatar/f9c38521a0acd385c7a19328022310e9?d=mm&s=32"
+      },
+      "displayName":"Administrator",
+      "active":true
+   },
+   "components":[
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/component/10000",
+         "id":"10000",
+         "name":"Database",
+         "description":"The database component",
+         "isAssigneeTypeValid":false
+      }
+   ],
+   "issueTypes":[
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/issuetype/10002",
+         "id":"10002",
+         "description":"A task that needs to be done.",
+         "iconUrl":"http://10.70.0.75:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+         "name":"Task",
+         "subtask":false,
+         "avatarId":10318
+      },
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/issuetype/10003",
+         "id":"10003",
+         "description":"The sub-task of the issue",
+         "iconUrl":"http://10.70.0.75:8080/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype",
+         "name":"Sub-task",
+         "subtask":true,
+         "avatarId":10316
+      },
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/issuetype/10001",
+         "id":"10001",
+         "description":"Created by JIRA Software - do not edit or delete. Issue type for a user story.",
+         "iconUrl":"http://10.70.0.75:8080/images/icons/issuetypes/story.svg",
+         "name":"Story",
+         "subtask":false
+      },
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/issuetype/10004",
+         "id":"10004",
+         "description":"A problem which impairs or prevents the functions of the product.",
+         "iconUrl":"http://10.70.0.75:8080/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
+         "name":"Bug",
+         "subtask":false,
+         "avatarId":10303
+      },
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/issuetype/10000",
+         "id":"10000",
+         "description":"Created by JIRA Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+         "iconUrl":"http://10.70.0.75:8080/images/icons/issuetypes/epic.svg",
+         "name":"Epic",
+         "subtask":false
+      }
+   ],
+   "assigneeType":"UNASSIGNED",
+   "versions":[
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/version/10000",
+         "id":"10000",
+         "name":"Version 1.0",
+         "archived":false,
+         "released":true,
+         "releaseDate":"2019-02-14",
+         "userReleaseDate":"14/Feb/19",
+         "projectId":10000
+      },
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/version/10001",
+         "id":"10001",
+         "name":"Version 2.0",
+         "archived":false,
+         "released":false,
+         "releaseDate":"2019-02-28",
+         "overdue":true,
+         "userReleaseDate":"28/Feb/19",
+         "projectId":10000
+      },
+      {
+         "self":"http://10.70.0.75:8080/rest/api/2/version/10002",
+         "id":"10002",
+         "name":"Version 3.0",
+         "archived":false,
+         "released":false,
+         "projectId":10000
+      }
+   ],
+   "name":"Test Project1",
+   "roles":{
+      "Developers":"http://10.70.0.75:8080/rest/api/2/project/10000/role/10100",
+      "Administrators":"http://10.70.0.75:8080/rest/api/2/project/10000/role/10002"
+   },
+   "avatarUrls":{
+      "48x48":"http://10.70.0.75:8080/secure/projectavatar?avatarId=10324",
+      "24x24":"http://10.70.0.75:8080/secure/projectavatar?size=small&avatarId=10324",
+      "16x16":"http://10.70.0.75:8080/secure/projectavatar?size=xsmall&avatarId=10324",
+      "32x32":"http://10.70.0.75:8080/secure/projectavatar?size=medium&avatarId=10324"
+   },
+   "projectTypeKey":"software"
+}

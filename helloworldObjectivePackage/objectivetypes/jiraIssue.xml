@@ -1,0 +1,1687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<obj:objectiveType xmlns:obj="http://www.seastreet.com/Genesys/objectiveType">
+  <tags/>
+  <name>jiraIssue</name>
+  <description></description>
+  <properties>
+    <property>
+      <name>description</name>
+      <type>genesysCore/1.0/string</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+        <item>WRITE</item>
+      </access>
+    </property>
+    <property>
+      <name>jiraIssue</name>
+      <type>genesysCore/1.0/url.resource</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+        <item>OPTIONAL</item>
+      </access>
+    </property>
+    <property>
+      <name>resolution</name>
+      <type>genesysCore/1.0/map</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>lastViewed</name>
+      <type>genesysCore/1.0/datetime</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>assignee</name>
+      <type>genesysCore/1.0/map</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+        <item>WRITE</item>
+      </access>
+    </property>
+    <property>
+      <name>issuetype</name>
+      <type>genesysCore/1.0/map</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>status</name>
+      <type>genesysCore/1.0/map</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>creator</name>
+      <type>genesysCore/1.0/map</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>reporter</name>
+      <type>genesysCore/1.0/map</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+        <item>WRITE</item>
+      </access>
+    </property>
+    <property>
+      <name>project</name>
+      <type>genesysCore/1.0/map</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>resolutiondate</name>
+      <type>genesysCore/1.0/datetime</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>updated</name>
+      <type>genesysCore/1.0/datetime</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>summary</name>
+      <type>genesysCore/1.0/string</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+        <item>WRITE</item>
+      </access>
+    </property>
+    <property>
+      <name>created</name>
+      <type>genesysCore/1.0/datetime</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>transition</name>
+      <type>genesysCore/1.0/map</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>WRITE</item>
+      </access>
+    </property>
+    <property>
+      <name>possibleTransitions</name>
+      <type><![CDATA[genesysCore/1.0/collection<genesysCore/1.0/map>]]></type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>addComment</name>
+      <type>genesysCore/1.0/string</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>WRITE</item>
+      </access>
+    </property>
+    <property>
+      <name>key</name>
+      <type>genesysCore/1.0/string</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>pollFrequencySeconds</name>
+      <type>genesysCore/1.0/integer</type>
+      <defaultValue>0</defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+        <item>WRITE</item>
+      </access>
+    </property>
+    <property>
+      <name>pollTimerUid</name>
+      <type>genesysCore/1.0/uid</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>READ</item>
+      </access>
+    </property>
+    <property>
+      <name>fixVersions</name>
+      <type><![CDATA[genesysCore/1.0/collection<genesysCore/1.0/map>]]></type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+        <item>WRITE</item>
+      </access>
+    </property>
+    <property>
+      <name>customFieldMap</name>
+      <type>jira/2.0/json</type>
+      <defaultValue></defaultValue>
+      <access>
+        <item>OPTIONAL</item>
+        <item>READ</item>
+        <item>WRITE</item>
+      </access>
+    </property>
+  </properties>
+  <businessLogic>
+    <create><![CDATA[/** Business logic for create */
+
+// =============================================================
+// JSHint options
+
+// =============================================================
+// 'main' business logic
+
+$.trace("Entering 'jiraIssue::create'");
+
+var resSelf = $this.getProperty("jiraIssue");
+var project = $this.getProperty("project");
+
+// If resSelf is given, then project property isn't needed. Otherwise, it is required.
+if(!resSelf && !project){
+	throw "The 'project' property is required if the resource issue resource doesn't already exist.";
+}
+
+$.trace("Exiting 'jiraIssue::create'");
+	]]></create>
+    <realize><![CDATA[/** Business logic for realize */	
+
+/** Business logic for create */
+
+// =============================================================
+// 'main' business logic
+
+$.trace("Entering 'jiraIssue::realize'");
+
+var resSelf = $this.getProperty("jiraIssue");
+
+if(resSelf){
+	$.debug("The Jira Issue Resource had already been created prior to this objective getting created.");
+    $this.attachEvent("/genesys/objective/" + $this.getSelf() + " " + GenesysEvents.EVENT_RESOURCE_CREATE_SUCCESS);
+    $this.attachEvent("/genesys/objective/" + $this.getSelf() + " " + GenesysEvents.EVENT_RESOURCE_CREATE_FAIL);
+    $this.attachEvent("/genesys/objective/" + $this.getSelf() + " " + GenesysEvents.EVENT_RESOURCE_UPDATE_SUCCESS);
+    $this.attachEvent("/genesys/objective/" + $this.getSelf() + " " + GenesysEvents.EVENT_RESOURCE_UPDATE_FAIL);
+    $this.attachEvent("/genesys/objective/" + $this.getSelf() + " " + GenesysEvents.EVENT_RESOURCE_DELETE_SUCCESS);
+    $this.attachEvent("/genesys/objective/" + $this.getSelf() + " " + GenesysEvents.EVENT_RESOURCE_DELETE_FAIL);
+	$this.attachEvent(resSelf + " " + GenesysEvents.EVENT_UPDATE_RESOURCE_REP);
+
+	$this.addIssueIfNotRaised("Objective's operational state properties are out of sync.", GenesysIssues.ISSUE_RESOURCE_STATE_OUT_OF_SYNC, [], "INFO");	
+} else {
+	$.info("The Jira Issue Resource has not been created prior to this objective getting created. Creating Resource Missing Issue.");	
+	$this.addIssueIfNotRaised("Resource is missing on this objective: jira.issue", GenesysIssues.ISSUE_RESOURCE_MISSING, "jiraIssue", "warn");
+}
+
+var pollFrequencySeconds = $this.getProperty("pollFrequencySeconds");
+if (pollFrequencySeconds > 0) {
+	$this.cancelTimerTask($this.getProperty("pollTimerUid"));
+	var timer = $this.scheduleTimerTask(pollFrequencySeconds * 1000, pollFrequencySeconds * 1000, "pollForUpdates");
+	$this.setProperty("pollTimerUid", timer);
+}
+
+$this.repair();
+$.trace("Exiting 'jiraIssue::realize'");
+	]]></realize>
+    <repair><![CDATA[/** Business logic for repair */
+
+/* jshint strict: false */
+
+/*
+ * The minimal set of properties to create a new Jira issue
+ */
+var CREATE_ISSUE_PROPS = [ PROJECT, ASSIGNEE, DESCRIPTION, SUMMARY, ISSUE_TYPE, CUSTOM_FIELD_MAP ];
+
+/*
+ * The issues to update on the objective. Declared here, as the objective to
+ * update may not have these properties set (and so are not available when returning
+ * the properties on the objective).  
+ */
+var OBJ_PROPS_TO_UPDATE = [LAST_VIEWED, RESOLUTION_DATE, CREATED, UPDATED, STATUS,
+    DESCRIPTION, SUMMARY, PROJECT, POSSIBLE_TRANSITIONS, ASSIGNEE, KEY, ISSUE_TYPE];
+    
+
+/****************************************Functions****************************************/
+
+/**
+ * Returns a map of properties that are suitable for creating
+ * a Jira issue resource.
+ */
+function createIssueProps(){
+
+    $.trace("Entering 'jiraIssue::repair.createIssueProps'");
+    
+    var returnProps = {};
+    var objProps = $this.getProperties();
+    var customFieldMap = objProps[CUSTOM_FIELD_MAP];
+    
+    for (var key in CREATE_ISSUE_PROPS) { 
+        var propName = CREATE_ISSUE_PROPS[key];
+        var propValue = objProps[propName];
+        
+        if (propValue) {
+            if (propName !== CUSTOM_FIELD_MAP) {
+                returnProps[propName] = propValue;
+                continue;
+            }
+            
+            /*
+             * For the custom field map, extract the members from the map,
+             * and construct their Jira customfield names/values
+             */
+            var customFieldMap = JSON.parse(propValue);
+            /* jshint forin: false */
+            for (var fieldName in customFieldMap) {
+                propName = fieldName;
+                propValue = extractCustomFieldValue(customFieldMap[fieldName]);
+                returnProps[propName] = propValue;
+                $.debug("Adding customfield named '" + fieldName + "' adding '" + propName + ":" + propValue + "' to issueCreationProps");
+            }
+        }
+    }
+    
+    $.trace("Exiting 'jiraIssue::repair.createIssueProps' with '" + JSON.stringify(returnProps) + "'");
+    return returnProps;
+}
+
+/**
+ * Using 'tempArray' as a template, copy and return the contents of 'sourceArray', 
+ * choosing only those properties that match those found in tempArray elements.</p>
+ *
+ * The actual contents of tempArray are ignored, assuming that the resource
+ * property values are the source of truth.  The first tempArray element is referenced
+ * only to provide the property names that should be copied from sourceArray elements
+ * to the elements that are returned.
+ */
+function copyArrayProps(tempArray, sourceArray) {
+    $.trace("Entering jiraIssue::repair.copyArrayProps - tempArray: " + JSON.stringify(tempArray) + "; sourceArray: " + JSON.stringify(sourceArray));
+    
+    var retVal = [];
+    if (!isArray(sourceArray)) {
+        $.error("sourceArray '" + JSON.stringify(sourceArray) + "' is not an array");
+        $.trace("Exiting jiraIssue::repair.copyArrayProps - returning null");
+        return null;
+    }
+    
+    if (tempArray === null || isArray(tempArray) && tempArray.length === 0) {
+        $.info("objective array property is null or empty - returning sourceArray");
+        $.trace("Exiting jiraIssue::repair.copyArrayProps. tempArray is empty null or empty - returning sourceArray unchanged");
+        return sourceArray;
+    }
+    
+    if (!isArray(tempArray)) {
+        $.warn("tempArray '" + JSON.stringify(tempArray) + "' is not an array - returning sourceArray");
+        $.trace("Exiting jiraIssue::repair.copyArrayProps. Invalid tempArray passed - returning sourceArray unchanged");
+        return sourceArray;
+    }
+    
+    /*
+     * Use the first element of the tempArray to get the property names
+     * to copy from target.
+     */
+    var propNames = Object.getOwnPropertyNames(tempArray[0]);
+    sourceArray.forEach(function(elem) {
+        var newObj = {};
+        propNames.forEach(function(propName) {
+            newObj[propName] = elem[propName];
+        });
+        retVal.push(newObj);
+    });
+
+    $.trace("Exiting jiraIssue::repair.copyArrayProps - returning " + JSON.stringify(retVal));
+    return retVal;
+}
+
+/**
+ * Called by processIssue when this objective is out sync with its associated
+ * resource.
+ *
+ * Determines whether this objective's properties needs to be aligned with that
+ * of its resource representation. If true, fires an event to that effect.
+ * 
+ * @param {Object} issue  The issue to remove once harmonization has finished.
+ */
+function updateObjFromResource(issue) { 
+    $.trace("Entering 'jiraIssue::repair.updateObjFromResource' with '" + JSON.stringify(issue) + "'");
+    
+    /*
+     * If we got here, this function has been called in response to an update to the resource that happened
+     * outside of this objective context. If the resource is missing, or there's 
+     * an error obtaining the resource raise an issue to that effect.
+     */
+    var objProps = $this.getProperties();
+    var resourceRep = getObjResource(objProps[JIRA_ISSUE]);
+    if (resourceRep === null) {
+        $.error("Exiting 'jiraIssue::repair.updateObjFromResource' - error retrieving resource: " + objProps[JIRA_ISSUE]);
+        return;
+    }
+    
+    // The map of properties to values that need updating on this objective.
+    var propsToUpdate = {};
+    
+    /*
+     * Iterate through our list of objective properties to update, updating from
+     * the resource if changed. Handle the custom field map separately.
+     */
+    var updateRequired = false;
+    var resProps = resourceRep.getProperties();
+    $.info("Updating objective - state of objective properties: " + JSON.stringify(objProps));
+    $.info("Updating objective - State of resource properties: " + JSON.stringify(resProps));
+
+    /* jshint forin: false */
+    for (var ndx in OBJ_PROPS_TO_UPDATE) {
+        var propName = OBJ_PROPS_TO_UPDATE[ndx];
+        $.info("Evaluating objective property update with property '" + propName + "'");
+
+        // Custom field map evaluation is handled outside this iteration
+        if (propName === CUSTOM_FIELD_MAP) {
+            continue;
+        }
+        
+        /*
+         * We use the properties returned by the resource to drive what gets updated
+         * on the objective.  If the property doesn't exist on the objective, an
+         * exception is raised, as opposed to return (e.g.) 'undefined'.
+         */
+        var resPropValue = resProps[propName];
+        var objPropValue = objProps[propName];
+        $.info("Value of '" + propName + "' on resource: " + resPropValue + ", on objective: " + objPropValue);
+
+        if (propName === POSSIBLE_TRANSITIONS) {
+            /*
+             * "possibleTransitions" is not a field that exists in Jira - the
+             * values returned by the RD are translated here to storage on the objective
+             * for future consideration of what transitions can be applied.
+             */
+            $.info("Handling " + POSSIBLE_TRANSITIONS + " property");
+            var newTrans = [];
+            for (var i = 0; i < resPropValue.length; i++) {
+                var nt = { "id": resPropValue[i].id, "name": resPropValue[i].name };
+                newTrans.push(nt);
+            }
+            
+            if (!$.areListsEqual(objPropValue, newTrans)) {
+                propsToUpdate[POSSIBLE_TRANSITIONS] = newTrans;
+                updateRequired = true; 
+            }
+            continue;
+        }
+
+        // The Jira resource, for some properties, can contain object values with
+        // many attributes, where only one such attribute will be of interest to 
+        // the objective (e.g. an identifying attribute, like 'name').  If our
+        // objective property is an object, selectively compare it against the 
+        // incoming resource to determine if there are differences. if there are differences,
+        // copy from the resource only those fields that are defined on 
+        // the object representation in the objective.
+        
+        if (isObject(objPropValue)) {
+            $.trace(propName + " is an object value");
+            if (!objsEqual(objPropValue, resPropValue)) {
+                $.info("Found object property " + propName + " has changed from " + objPropValue + " to " + resPropValue);
+                copyObj(objPropValue, resPropValue);
+                propsToUpdate[propName] = objPropValue;
+                updateRequired = true;
+            }
+        }
+        else if (!valuesAreEqual(objPropValue, resPropValue)) {
+            $.info("Found scalar property " + propName + " has changed from " + objPropValue + " to " + resPropValue);
+            propsToUpdate[propName] = resProps[propName];
+            updateRequired = true;
+        }
+    }
+
+    /*
+     * Evaluating custom fields for update is different than other properties.
+     * Rather than driving the comparison with the resource property, the 
+     * objective must be initialized with a customFieldMap, 
+     * whose present subfields are used to drive the comparison.
+     *
+     * Iterate over the custom fields defined on the objective, and see if their values 
+     * on the associated resource have changed.  The map is expected to be in the
+     * following form (e.g.): 
+     * 
+     * {"prop1" : {"value" : "{...}"}, "prop2" : {"value": {..}}}
+     */
+    if (objProps[CUSTOM_FIELD_MAP]) {
+        var customFieldUpdateRequired = false;
+        var customFieldsMap = JSON.parse(objProps[CUSTOM_FIELD_MAP]);
+        Object.keys(customFieldsMap).forEach(function(fieldName) {
+            var customFieldName = fieldName;
+            var customFieldValue = extractCustomFieldValue(customFieldsMap[fieldName]);
+            var priorFieldValue = JSON.stringify(customFieldValue);
+
+            if (resProps.hasOwnProperty(customFieldName) && !valuesAreEqual(customFieldValue, resProps[customFieldName])) {
+                if (isObject(customFieldValue)) {
+                    $.debug("Copying field value '" + priorFieldValue + "' as object");
+                    copyObj(customFieldValue, resProps[customFieldName]);
+                }
+                else if (isArray(customFieldValue)) {
+                    $.debug("Copying field value '" + priorFieldValue + "' as array");
+                    customFieldsMap[fieldName].value = copyArrayProps(customFieldValue, resProps[customFieldName]);
+                }
+                else {
+                    customFieldsMap[fieldName].value = resProps[customFieldName];
+                }
+                $.debug("Found property " + fieldName + " has changed from '" + priorFieldValue + "' to " + JSON.stringify(resProps[customFieldName]));
+                updateRequired = true;
+                customFieldUpdateRequired = true;
+            }
+        });
+        
+        if (customFieldUpdateRequired) {
+            propsToUpdate[CUSTOM_FIELD_MAP] = JSON.stringify(customFieldsMap);
+        }
+    }
+    
+    if (updateRequired) {
+        $this.setProperties(propsToUpdate);
+        var eventProps = {};
+        eventProps[EVENT_UPDATE_PROPS_NAME] = propsToUpdate;
+        $this.fireEvent(EVENT_JIRA_ISSUE_UPDATE, eventProps);
+    }
+    
+    $this.removeIssue(issue.uid);
+    $.trace("Exiting 'jiraIssue::repair.updateObjFromResource'");
+}
+
+/**
+ * Requests the asynchronous creation of the resource represented by this objective
+ * in response to the issue raised elsewhere that there is no resource for this object.
+ *
+ * @param issue the issue associated to this action.
+ */
+function processResourceMissingIssue(issue) {
+    $.trace("Entering 'jiraIssue::repair.processResourceMissingIssue' with issue: '" + JSON.stringify(issue) + "'");
+    
+	var inProgressIssue = $this.findIssueByCode(GenesysIssues.ISSUE_RESOURCE_CREATE_IN_PROGRESS, "jiraIssue");
+	if (!inProgressIssue) {
+		$.info("Objective [" + $this.getSelf() + "] has met criteria to create the jiraIssue resource. Generating CREATE_IN_PROGRESS issue");
+		$this.addIssueIfNotRaised("Creating resource: jira.issue",
+				GenesysIssues.ISSUE_RESOURCE_CREATE_IN_PROGRESS,
+				"jiraIssue", "info");
+		/*
+         * Retrieve the minimal set of properties for creation and request the resource creation.
+         */
+		var props = createIssueProps();
+		$.info("Requesting resource creation with the following properties: " + JSON.stringify(props));
+		$this.createResourceAsync("resource.jira.issue", props, "jiraIssue");
+	}
+	
+    $.trace("Exiting 'jiraIssue::repair.processResourceMissingIssue'");
+}
+
+/**
+ * Returns an object containing properties from "propObj" based on the specified
+ * predicate filter.
+ * 
+ * @param {object} propObj The property object to evaluate.
+ * 
+ * @param {function} filterSpec A function predicate that is called for each property on
+ * 'propObj', given the name of the property.  Return 'true' if that property is
+ * to be included in the returned object, 'false' if not.
+ *
+ * @return An object containing the properties based on the filter specification.
+ * Never <code>null</code>.
+ */
+function filterObject(propObj, filterSpec) {
+    $.trace("Entering jiraIssue::repair.filterPropObj - propObj: '" + JSON.stringify(propObj) + "' predicate: '" + filterSpec + "'");
+    
+    var filteredObj = {};
+    if (propObj === null || Object.prototype.toString.call(propObj) !== "[object Object]") {
+        $.warn("Referenced property is null or not an object");
+        return filteredObj;
+    }
+    
+    Object.keys(propObj).forEach(function(propName) {
+        if (filterSpec(propName)) {
+            filteredObj[propName] = propObj[propName];
+        }
+    });
+
+    $.trace("Exiting jiraIssue::repair.filterPropObj - filtered object: '" + JSON.stringify(filteredObj) + "'");
+    return filteredObj;
+}
+/**
+ * Given the object of properties requiring update, looks for either a transition or comment
+ * property, and raises an issue noting that the transition/comment is in the process
+ * of being updated and returns the single respective transition/comment as the next
+ * update candidate.  Otherwise, return the original 'resPropsToUpdate'.
+ *
+ * @param resPropsToUpdate An object containing property name/values on the resource requiring update, in JSON format.
+ * @returns The original array, or an array singleton of either a transition or comment prop/value, in JSON string format.
+ */
+function getNextPropSetForUpdate(resPropsToUpdate) {
+    $.trace("Entering 'jiraIssue::repair.getNextPropSetForUpdate' with '" + JSON.stringify(resPropsToUpdate) + "'");
+
+    var filteredObj = filterObject(resPropsToUpdate, function(propName) { return propName === TRANSITION; });
+    if (Object.keys(filteredObj).length > 0) {
+        var issueParm = JSON.stringify(filteredObj);
+        $this.addIssueIfNotRaised("Transition in progress.", ISSUE_TRANSITION_IN_PROGRESS, [issueParm], "info");
+        $.trace("Exiting 'jiraIssue::repair.getNextPropSetForUpdate' - added add-transition issue with parameter: " + issueParm);
+        return filteredObj;
+    }
+    
+    filteredObj = filterObject(resPropsToUpdate, function(propName) { return propName === ADD_COMMENT; });
+    if (Object.keys(filteredObj).length > 0) {
+        var issueParm = JSON.stringify(filteredObj);
+        $this.addIssueIfNotRaised("Comment addition in progress.", ISSUE_ADD_COMMENT_IN_PROGRESS, [issueParm], "info");       
+        $.trace("Exiting 'jiraIssue::repair.getNextPropSetForUpdate' - added add-comment issue with parameter: " + issueParm);
+        return filteredObj;
+    }
+    
+    $.trace("Exiting 'jiraIssue::repair.getNextPropSetForUpdate' with '" + JSON.stringify(resPropsToUpdate) + "'");
+    return resPropsToUpdate;
+}
+
+/**
+ * Called in response to processing issues for updating transitions and comments.
+
+ * @param issue The raised issue. Expected to contain an array of a single element,
+ * a serialized JS object containing properties that need to be set on the resource.
+ */
+function processAdditionalUpdatesIssue(issue){
+    $.trace("Entering 'jiraIssue::repair.processAdditionalUpdatesIssue' with '" + JSON.stringify(issue) + "'");
+
+    $.debug("Issue parameter value: '" + issue.parameters[0] + "'");
+    var issueProps = JSON.parse(issue.parameters[0]);
+
+    var propsToUpdate = getNextPropSetForUpdate(issueProps);
+    var updateObj = {};
+    Object.keys(propsToUpdate).forEach(function(propName) {
+        updateObj[propName] = propsToUpdate[propName];
+        /*
+         * ADD_COMMENT and TRANSITION are properties unique to the objective, and
+         * used to indirectly update other values on the Jira resource - they are
+         * write-only in that sense.  Setting them to 'null' notes that they
+         * have no value to update - we've captured that update here.
+         */
+        if (propName === TRANSITION || propName === ADD_COMMENT) {
+            $this.setProperty(propName, null);
+        }
+        
+        /*
+         * Since we are handling this property, remove it from the "additional updates" list
+         * that we place on the issue (i.e. return a new set of properties that includes all
+         * but the specified 'propName'.
+         */
+        issueProps = filterObject(issueProps, function(name) { return name !== propName; });
+    });
+    
+    $.info("Setting resource properties with '" + JSON.stringify(updateObj) + "'");
+    var subResLink = $this.getProperty(JIRA_ISSUE);
+    var timestamp = new Date().getTime();
+    var resourceRep = getObjResource(subResLink);
+    if (resourceRep === null) {
+        // Note that 'getObjResource' sets the appropriate issue for the missing resource
+        $.trace("Exiting 'jiraIssue::repair.processAdditionalUpdatesIssue' - objective resource unavailable");
+        return;
+    }
+    resourceRep.setPropertiesAsync(updateObj, timestamp);
+    
+    $this.addIssueIfNotRaised("Resource update in progress: setting '$1' to '$2'", 
+            GenesysIssues.ISSUE_RESOURCE_UPDATE_IN_PROGRESS,
+            [subResLink, JSON.stringify(updateObj), timestamp], "info");
+            
+    // Update old issue if there needs to be more updates
+    if (Object.keys(issueProps).length > 0) {
+       $.info("Updating issue with additional properties: " + JSON.stringify(issueProps));
+       $this.updateParameters(issue.uid, [JSON.stringify(issueProps)]);
+    } else {
+        $this.removeIssue(issue.uid);
+    }
+    
+    $.trace("Exiting 'jiraIssue::repair.processAdditionalUpdatesIssue'");
+}
+
+/**
+ * Called by processIssue in response to an unrealize issue.
+ */
+function processUnrealizePendingIssue(issue) {
+    $.trace("Entering 'jiraIssue::repair.processUnrealizePendingIssue' with: '" + JSON.stringify(issue) + "'");
+    
+    // if the only issue being tracked is unrealize pending, then unrealize has
+    // completed
+    if ($this.issues().length === 1) {
+        $.trace("unrealize completed");
+        $this.removeIssue(issue.uid);
+    }
+    else {
+        $.debug($this.issues().length + " issues remaining");
+    }
+    
+    $.trace("Exiting 'jiraIssue::repair.processUnrealizePendingIssue'");
+}
+
+/**
+ * Process the specified issue.
+ * 
+ * @param {object}
+ *            the issue to process
+ * @param {number}
+ *            the index of the issue in $this.issues()
+ */
+function processIssue(issueUid, issueIndex) {
+    $.trace("Entering 'jiraIssue::repair.processIssue' with issueUid: '" + issueUid + "', issueIndex: '" + issueIndex + "'");
+
+    var issue = $this.issues(issueUid);
+    $.info("Repair - processing issue '" + issue.code + "' with parameters '" + issue.parameters + "'");
+    switch (issue.code) {
+        // ---------------------------------------------------------------------
+        case GenesysIssues.ISSUE_RESOURCE_MISSING:
+            processResourceMissingIssue(issue);
+            break;
+        case ISSUE_ADDITIONAL_UPDATES_REQUIRED:
+            processAdditionalUpdatesIssue(issue);
+            break;
+        case GenesysIssues.ISSUE_RESOURCE_STATE_OUT_OF_SYNC:
+            updateObjFromResource(issue);
+            break;
+        case GenesysIssues.ISSUE_UNREALIZE_PENDING:
+            processUnrealizePendingIssue(issue);
+            break;            
+    }
+    
+    $.trace("Exiting 'jiraIssue::repair.processIssue'");
+}
+
+// =============================================================
+// 'main' business logic
+//
+$.arrayWalk($this.issues(), processIssue);]]></repair>
+    <notify><![CDATA[/** Business logic for notify */
+
+// =============================================================
+// Constants, variables
+
+var repairRequired = false;
+
+// =============================================================
+// Functions
+
+function processCreateSuccessEvent(event) {
+    $.trace("Entering 'jiraIssue::notify.processCreateSuccessEvent' with: '" + JSON.stringify(event) + "', key: " + event.properties.key);
+    
+	var eventNewResource = event.properties.newResourceSelf;
+	
+	$this.setProperty("jiraIssue", eventNewResource);
+	
+	$this.addIssueIfNotRaised("Objective's operational state properties are out of sync.", GenesysIssues.ISSUE_RESOURCE_STATE_OUT_OF_SYNC, [], "INFO");
+		
+	$.info("Successfully created resource ["+ eventNewResource + "] for objective [" + $this.getSelf() + "]");
+			
+	$this.attachEvent(eventNewResource + " " + GenesysEvents.EVENT_UPDATE_RESOURCE_REP);
+			
+	// Clear issues now
+	$this.removeIssueIfRaised(GenesysIssues.ISSUE_RESOURCE_CREATE_IN_PROGRESS, event.properties.key);
+	$this.removeIssueIfRaised(GenesysIssues.ISSUE_ERROR_RESOURCE_CREATE, event.properties.key);
+	$this.removeIssueIfRaised(GenesysIssues.ISSUE_RESOURCE_MISSING, event.properties.key);	
+	
+	repairRequired = true;
+					
+    $.trace("Exiting 'jiraIssue::notify.processCreateSuccessEvent'");
+}
+
+function processCreateFailedEvent(event) {
+    $.trace("Entering 'jiraIssue::notify.processCreateFailedEvent' with: '" + JSON.stringify(event) + "'");
+    
+    var inProgressIssue = 
+        $this.findIssueByCode(GenesysIssues.ISSUE_RESOURCE_CREATE_IN_PROGRESS, event.properties.key);
+    if (inProgressIssue) {
+        // parameter 0 = type of resource that was being created
+        var resourceType = inProgressIssue.parameters[0];
+        var propertyStoringReference = inProgressIssue.parameters[1];
+        $this.removeIssue(inProgressIssue.uid);
+
+        var errorMsg = event.properties.returnValue + " " + event.properties.parameters;
+        $.error("failed to create '" + resourceType + "': " + errorMsg);
+        
+        var removalPendingIssue = $this.findIssueByCode(GenesysIssues.ISSUE_REMOVAL_PENDING, propertyStoringReference);
+        if (removalPendingIssue) {
+            $.error("removal pending - no need to track resource create failure");
+            $this.removeIssue(removalPendingIssue.uid);
+        }
+        else {
+            $this.addIssueIfNotRaised("Failed to create '$1': $2", GenesysIssues.ISSUE_ERROR_RESOURCE_CREATE,
+                    [resourceType, errorMsg], "critical");
+        }
+    }
+    else {
+        $.warn("received '" + GenesysEvents.EVENT_RESOURCE_CREATE_FAIL + "' event for unknown update request '" +
+                event.properties.key + "'");
+    } 
+    $.trace("Exiting 'jiraIssue::notify.processCreateFailedEvent'");
+}
+
+function processUpdateSuccessEvent(event) {
+    $.trace("Entering 'jiraIssue::notify.processUpdateSuccessEvent' with: '" + JSON.stringify(event) + "', key: " + event.properties.key);
+    
+    /*
+     * If there's an update_in_progress issue, we raised it, and so the updated properties
+     * we updated will be a parameter on the issue, which for now, are only of interest
+     * to logging.
+     */
+    var inProgressIssue = $this.findIssueByCode(GenesysIssues.ISSUE_RESOURCE_UPDATE_IN_PROGRESS);
+    if (inProgressIssue) {
+        $.info("resource update successful for issue: " + JSON.stringify(inProgressIssue));
+        $this.removeIssue(inProgressIssue.uid);
+        $.trace("Exiting 'jiraIssue::notify.processUpdateSuccessEvent with successful resource update'");
+    }
+    else {
+        $.warn("received '" + GenesysEvents.EVENT_RESOURCE_UPDATE_SUCCESS + "' for unknown job '" + event.properties.key + "'");
+    }
+    $this.removeIssueIfRaised(GenesysIssues.ISSUE_ERROR_RESOURCE_UPDATE, event.properties.key);
+    $this.removeIssueIfRaised(ISSUE_TRANSITION_IN_PROGRESS);
+    $this.removeIssueIfRaised(ISSUE_ADD_COMMENT_IN_PROGRESS);	
+    
+    $.trace("Exiting 'jiraIssue::notify.processUpdateSuccessEvent'");
+}
+
+function processUpdateFailedEvent(event) {
+    $.trace("Entering 'jiraIssue::notify.processUpdateFailedEvent' with: '" + JSON.stringify(event) + "', key: " + event.properties.key);
+    
+    var inProgressIssue = $this.findIssueByCode(GenesysIssues.ISSUE_RESOURCE_UPDATE_IN_PROGRESS, event.properties.key);
+    if (inProgressIssue) {
+        var resLink = inProgressIssue.parameters[0];
+        $this.removeIssue(inProgressIssue.uid);
+    
+        var errorMsg = event.properties.returnValue + " " + event.properties.parameters;
+        $this.addIssueIfNotRaised("Failed to update resource '$1': $2", GenesysIssues.ISSUE_ERROR_RESOURCE_UPDATE,
+                [resLink, errorMsg, event.properties.key], "critical");
+
+        $.error("failed to update '" + resLink + "': " + errorMsg);
+    }
+    else {
+        $.warn("received '" + GenesysEvents.EVENT_RESOURCE_UPDATE_FAIL + "' event for unknown update '" + event.properties.key + "'");
+    }
+    
+    $.trace("Exiting 'jiraIssue::notify.processUpdateFailedEvent'");
+}
+
+function processResourceUpdatedEvent() {
+    $.trace("Entering 'jiraIssue::notify.processResourceUpdatedEvent'");
+    
+    $this.addIssueIfNotRaised("Objective's operational state properties are out of sync.", GenesysIssues.ISSUE_RESOURCE_STATE_OUT_OF_SYNC, [], "INFO");
+    repairRequired = true;
+    
+    $.trace("Exiting 'jiraIssue::notify.processResourceUpdatedEvent' - repairRequired");
+}
+
+function processNotifyTimerEvent(event) {
+    $.trace("Entering 'jiraIssue::notify.processNotifyTimerEvent' with: '" + JSON.stringify(event) + "'");
+    
+	var context = event.properties.eventContext;
+	$.info("Got timer expired event for context '" + context + "'");
+	
+	switch (context) {
+		case "pollForUpdates":
+			// Using existing out of sync issue here since it will trigger harmonize in repair
+			processResourceUpdatedEvent();
+			break;
+	}
+	
+    $.trace("Exiting 'jiraIssue::notify.processNotifyTimerEvent'");
+}
+
+// =============================================================
+// 'main' business logic
+
+$.trace("Entering 'jiraIssue::notify' with '" + JSON.stringify(event) + "'");
+
+var repairRequired = false;
+
+switch (event.type) {
+    
+    case GenesysEvents.EVENT_RESOURCE_CREATE_SUCCESS:
+        processCreateSuccessEvent(event);
+        break;
+    case GenesysEvents.EVENT_RESOURCE_CREATE_FAIL:
+        processCreateFailedEvent(event);
+        break;
+    case GenesysEvents.EVENT_RESOURCE_UPDATE_SUCCESS:
+        processUpdateSuccessEvent(event);
+        break;
+    case GenesysEvents.EVENT_RESOURCE_UPDATE_FAIL:
+        processUpdateFailedEvent(event);
+        break;
+    case GenesysEvents.EVENT_UPDATE_RESOURCE_REP:
+    	processResourceUpdatedEvent();
+    	break;
+    case GenesysEvents.EVENT_NOTIFY_TIMER:
+        processNotifyTimerEvent(event);
+        break;         	
+}
+
+if (repairRequired) {
+    $.info("repair required after notify processing");
+    $this.repair();
+}
+$.trace("Exiting 'jiraIssue::notify'");
+]]></notify>
+    <unrealize><![CDATA[/** Business logic for unrealize */
+
+// =============================================================
+// Functions
+
+
+// =============================================================
+// 'main' business logic
+
+$.trace("Entering 'jiraIssue::unrealize'");
+
+var constituentUnrealizePending = false;
+var issues = $this.issues();
+$.info("processing " + issues.length + " issues for removal");
+/* jshint forin: false */
+for (var ndx in issues) {
+    var issue = $this.issues(issues[ndx]);
+    $.trace("Value of issue: '" + JSON.stringify(issue) + "'");
+    switch (issue.code) {
+        case GenesysIssues.ISSUE_UNREALIZE_PENDING:
+            constituentUnrealizePending = true;
+            break;
+        default:
+            $this.removeIssue(issue.uid);
+            break;
+    }
+}
+
+// added even if there is no work to do because it is a signal to governors that unrealize has started/completed
+$this.addIssueIfNotRaised("Unrealize pending", GenesysIssues.ISSUE_UNREALIZE_PENDING, [$this.getUid()], "info");
+
+// if unrealize is not waiting on constituents then call repair so the unrealize pending is removed
+if (!constituentUnrealizePending) {
+    $.trace("Calling repair");
+    $this.repair();
+}
+
+$.trace("Exiting 'jiraIssue::unrealize'");
+]]></unrealize>
+    <destroy><![CDATA[/** Business logic for unrealize */
+
+// =============================================================
+// Functions
+
+$.trace("Entering 'jiraIssue::destroy'");
+
+var error = null;
+if ($this.getRealized()) {
+    error = "Unable to destroy Objective instance: instance is realized";
+}
+else if ($this.issues().length > 0) {
+    error = "Unable to destroy Objective instance: issues present";
+}
+
+if (error) {
+    $.error(error);
+    throw error;
+}
+
+$.trace("Exiting 'jiraIssue::destroy'");
+
+]]></destroy>
+    <set><![CDATA[/** Business logic for 'set' */
+
+// =============================================================
+// Constants
+
+/*
+ * Note that order is important here - comment and transition should be evaluated first, as 
+ * the presence of these properties pushes the update of properties that follow in
+ * subsequent network calls.
+ */
+var PROPERTIES_TO_EVALUATE = [TRANSITION, ADD_COMMENT, DESCRIPTION, SUMMARY, ASSIGNEE, CUSTOM_FIELD_MAP, "pollFrequencySeconds"];
+
+var isCommentAdded = false;
+var isTransitionStarted = false;
+var needUpdateIssue = false;
+
+// The name/values of properties to update
+var resourcePropsToUpdate = {};
+
+// The properties that require updating after the initial propset has completed successfully.
+var delayedResPropsUpdate = {};
+
+// Collects properties/values for event notification
+var notifyPropsUpdate = {};
+
+// =============================================================
+// Functions
+
+/**
+ * Throw an exception to indicate a property change is invalid
+ * @param {string} errorMsg the error message to log and throw as exception
+ * @throws Exception
+ */
+function throwExceptionForInvalidPropertyChange(errorMsg) {
+    $.error("Set operation rejected: " + errorMsg);
+    throw errorMsg;
+}
+
+/**
+ * Returns whether the transition in the specified 'newValue' is present in our
+ * list of possible transitions.
+ * 
+ * @param {object} newValue A structure expected to have an 'id' and 'name' field.
+ * @returns true if the transition is listed as a possible transition, false
+ * if not.
+ */
+function isAvailableTransition(newValue) {
+    $.trace("Entering 'jiraIssue::set.isAvailableTransition' with '" + newValue + "'");
+
+	var possibleTrans = $this.getProperty(POSSIBLE_TRANSITIONS);
+	if (!possibleTrans) {
+	    $.trace("Exiting 'jiraIssue::set.isAvailableTransition' - false - no transition properties available");
+	    return false;
+	}
+	
+	$.info("Value for property '" + POSSIBLE_TRANSITIONS + "': " + JSON.stringify(possibleTrans));
+	
+	for (var count=0; count < possibleTrans.length; count++) {
+		if (possibleTrans[count].id === newValue.id) {
+            $.trace("Exiting 'jiraIssue::set.isAvailableTransition' - true - with count:'" + count + "' and id:'" + newValue.id + "'");
+			return true;
+		} else if (possibleTrans[count].name === newValue.name) {
+            $.trace("Exiting 'jiraIssue::set.isAvailableTransition' - true - with count:'" + count + "' and name:'" + newValue.name + "'");
+			return true;
+		}
+	}
+	
+    $.trace("Exiting 'jiraIssue::set.isAvailableTransition' - false");
+	return false;
+}
+
+/**
+ * If we're not in the process of updating a comment, update our state and
+ * raise the issue that a transition needs to be handle.
+ */
+function processTransition(newValue) {
+    $.trace("Entering 'jiraIssue::set.processTransition' with '" + newValue + "'");
+
+    if (!newValue) {
+        $.warn("The transition field has been set to null, which is undefined");
+        $.trace("Exiting 'jiraIssue::set.processTransition' with no updates");
+        return;
+    }
+    
+	if (!isCommentAdded) {
+		if (isAvailableTransition(newValue)) {
+			// Set the transition property to null to allow for future transitions
+			$this.setProperty(TRANSITION, null);
+			notifyPropsUpdate[TRANSITION] = resourcePropsToUpdate[TRANSITION] = newValue;
+	        $this.addIssueIfNotRaised("Transition in progress.", ISSUE_TRANSITION_IN_PROGRESS, [JSON.stringify(newValue)], "info");
+	        isTransitionStarted = true;
+		} else {
+			throw "Invalid transition to " + JSON.stringify(newValue);
+		}
+	} else {
+		needUpdateIssue = true;
+		delayedResPropsUpdate[TRANSITION] = newValue;
+	}
+	
+    $.trace("Exiting 'jiraIssue::set.processTransition' with isTransitionStarted: '" + isTransitionStarted + "' needUpdateIssue: '" + needUpdateIssue + "'");
+}
+
+/**
+ * If we're not in the process of handling a transition, start the process
+ * of notifying for a comment update, else, save away the notion that we need
+ * to update the comment to handle later.
+ */
+function processAddComment(oldValue, newValue) {
+    $.trace("Entering 'jiraIssue::set.processAddComment' with oldValue: '" + oldValue + "', newValue: '" + newValue + "'");
+
+	// The portal may pass in empty string instead of null
+	if (!newValue) {
+        $.warn("The comment field has been set to null, which is undefined");
+        $.trace("Exiting 'jiraIssue::set.processAddComment' with no updates");
+		return;
+	}
+
+	if (oldValue === newValue) {
+	    $.trace("Comment properties are not different");
+	    return;
+	}
+	
+	if (!isTransitionStarted) {
+		// Set the comment property to null to allow for future comments
+		$this.setProperty(ADD_COMMENT, null);
+		notifyPropsUpdate[ADD_COMMENT] = resourcePropsToUpdate[ADD_COMMENT] = newValue;
+	    $this.addIssueIfNotRaised("Comment addition in progress.", ISSUE_ADD_COMMENT_IN_PROGRESS, [JSON.stringify(newValue)], "info");
+	    isCommentAdded = true;
+    } else {
+    	needUpdateIssue = true;
+    	delayedResPropsUpdate[ADD_COMMENT] = newValue;
+    }
+    $.trace("Exiting 'jiraIssue::set.processAddComment' with isCommentAdded: '" + isCommentAdded + "' needUpdateIssue: '" + needUpdateIssue + "'");
+}
+
+/**
+ * Handle a change in a property. We enter this routine assuming the 'old' and 'new'
+ * values are different.
+ */
+function processCommonProp(oldValue, newValue, propName) {
+    $.trace("Entering 'jiraIssue::set.processCommonProp' with oldValue: '" + oldValue + "', newValue: '" + newValue + "', propName: '" + propName + "'");
+
+    if (oldValue === newValue) {
+        $.trace("Common properties are not different");
+        return;
+    }
+    
+	if(!isTransitionStarted && !isCommentAdded){
+        notifyPropsUpdate[propName] = resourcePropsToUpdate[propName] = newValue;
+        $.trace("Updating notify and resource props for propName: '" + propName + "' with: " + JSON.stringify(newValue));
+	} else {
+        needUpdateIssue = true;
+        delayedResPropsUpdate[propName] = newValue;
+	}
+	
+    $.trace("Exiting 'jiraIssue::set.processCommonProp' with needUpdateIssue: '" + needUpdateIssue + "'");
+}
+
+/**
+ * Determine what properties on the field map have changed, and update the appropriate
+ * data structures.  Object structures are expected on the incoming parameters.  It is
+ * assumed that we got here because something within those objects are different.
+ * The field map names are translated to their Jira equivalent before being set 
+ * on the various update maps.
+ */
+function processCustomFieldMap(oldValue, newValue) {
+    $.trace("Entering 'jiraIssue::set.processCustomField - oldValue: '" + JSON.stringify(oldValue) + "', newValue: '" + JSON.stringify(newValue));
+
+    /*
+     * There's a couple of special cases here.  If 'oldValue' is null, then all
+     * of the values in 'newValue' win.  If 'newValue' is null, the implication is
+     * (perhaps), that, for all of the properties named in 'oldValue', their values
+     * should be cleared or set to 'null' in 'newValue'.  Because we don't know what
+     * the semantic for that might really mean, we'll just exit this method without
+     * calling or updates.
+     */
+    if (!newValue) {
+        $.warn("The custom field value for updates has been set to null, which is undefined - exiting customFieldMap updates");
+        $.trace("Exiting 'jiraIssue::set.processCustomFieldMap' with no updates");
+        return;
+    }
+    
+    if (!oldValue) {
+        oldValue = {};
+    }
+    
+    var changedCustomProps = [];
+    Object.keys(newValue).forEach(function(propName) {
+        if (valuesAreEqual(newValue[propName], oldValue[propName])) {
+            return;
+        }
+        
+        var newPropValue = newValue[propName];
+        var customPropName = propName;
+        var customPropValue = extractCustomFieldValue(newPropValue); 
+        
+        /*
+         * If a transition or comment has been started, we can't update the other fields
+         * so we just capture the name/value of the customField, to be reconciled after the 
+         * transitions/comments udpates have cleared. 
+         */
+        if (isTransitionStarted || isCommentAdded) {
+            needUpdateIssue = true;
+            delayedResPropsUpdate[customPropName] = customPropValue;
+            return;
+        }
+        
+        resourcePropsToUpdate[customPropName] = customPropValue;
+        changedCustomProps.push(customPropName);
+    });
+    
+    /*
+     * The property map for event notification will just list that the customFieldMap has changed -
+     * the caller will have to figure out which sub-property has changed.
+     */ 
+    notifyPropsUpdate[CUSTOM_FIELD_MAP] = newValue;
+    
+    $.trace("Exiting 'jiraIssue::set.processCustomFieldMap' with the following custom props to update: " + JSON.stringify(changedCustomProps));
+}
+
+// =============================================================
+// 'main' business logic
+//
+
+$.trace("Entering 'jiraIssue::set'");
+
+if ($this.getRealized() && !$this.findIssueByCode(GenesysIssues.ISSUE_UNREALIZE_PENDING)) {
+        
+    var props = $this.getProperties();
+    var oldProps = $old.getProperties();
+    
+    /* jshint forin: false */
+    for (var ndx in PROPERTIES_TO_EVALUATE) {
+        var propName = PROPERTIES_TO_EVALUATE[ndx];
+        
+        var newPropValue = props[propName];
+        var oldPropValue = oldProps[propName];
+        
+        $.trace("jiraIssue::set - checking property '" + propName + "': old value '" + oldPropValue + 
+                "', new value '" + newPropValue + "'");
+
+        /*
+         * Parse the customFieldMap value into an object, so that it can be correctly
+         * compared.
+         */
+        if (propName === CUSTOM_FIELD_MAP) {
+            $.debug("Value of new customfield: " + newPropValue + "- Value of old customfield: " + oldPropValue);
+            if (newPropValue !== undefined) {
+                newPropValue = JSON.parse(newPropValue);
+            }
+            if (oldPropValue !== undefined) {
+                oldPropValue = JSON.parse(oldPropValue);
+            }
+        }
+        
+        /*
+         * Test for changes.  If something changed then start an async property update.
+         */
+        if (valuesAreEqual(newPropValue, oldPropValue)) {
+            $.trace(propName + " value unchanged");
+            continue;
+        }
+        
+        switch (propName) {
+            case TRANSITION:
+                processTransition(newPropValue);
+                break;
+            case ADD_COMMENT:
+                processAddComment(oldPropValue, newPropValue);
+                break;
+            case CUSTOM_FIELD_MAP:
+                processCustomFieldMap(oldPropValue, newPropValue);
+                break;
+            case "pollFrequencySeconds":
+                $this.cancelTimerTask(props[POLL_TIMER_UID]);
+                if (newPropValue > 0) {
+                    var timer = $this.scheduleTimerTask(newPropValue * 1000, newPropValue * 1000, "pollForUpdates");
+                    $this.setProperty("pollTimerUid", timer);
+                }
+                break;
+            default:         
+                processCommonProp(oldPropValue, newPropValue, propName);
+                break;
+        }
+    }
+
+    var errorRetrievingResource = false;
+    
+    if (resourcePropsToUpdate && Object.keys(resourcePropsToUpdate).length > 0) {
+    	$.debug("properties changes need to be passed to jira issue resource");
+    	
+    	var subResLink = props[JIRA_ISSUE];
+    	var timestamp = new Date().getTime();
+        var resourceRep = getObjResource(subResLink);
+        if (resourceRep === null) {
+            $.warn("Error retrieving resource for objective");
+            errorRetrievingResource = true;
+        } 
+        else {
+            $.debug("Setting the following properties on '" + subResLink + "': " + JSON.stringify(resourcePropsToUpdate));
+        	resourceRep.setPropertiesAsync(resourcePropsToUpdate, timestamp);
+        	
+        	//
+            // parameters: 0 - the jiraIssue self link
+            //             1 - the map of prop->value being updated 
+            //             2 - timestamp identifier for the async job
+            //
+            $this.addIssueIfNotRaised("Resource update in progress: setting '$1' to '$2'", 
+                    GenesysIssues.ISSUE_RESOURCE_UPDATE_IN_PROGRESS,
+                    [subResLink, JSON.stringify(notifyPropsUpdate), timestamp], "info");
+        }
+    }
+
+    
+    if (needUpdateIssue && !errorRetrievingResource) {
+	    $this.addIssueIfNotRaised("Additional updates to $1 are required.", ISSUE_ADDITIONAL_UPDATES_REQUIRED,
+	            [JSON.stringify(delayedResPropsUpdate)], "warn");
+    }
+}
+
+$.trace("Exiting 'jiraIssue::set'");
+
+
+]]></set>
+    <common><![CDATA[/** Business logic for common */
+
+// As these constants/functions are used in other methods, don't check for 'unused'
+/* jshint unused: false */
+
+// =============================================================
+// Constants
+// 
+// Removing these constants from linting, as they are considered a redefinition
+// of what is specified in the .jshintrc file (that file marks those values
+// as global non-modifiable.
+//
+/* jshint ignore: start */
+var LAST_VIEWED = "lastViewed"; 
+var RESOLUTION_DATE = "resolutiondate";
+var CREATED = "created";
+var UPDATED = "updated";
+var STATUS = "status"; 
+var DESCRIPTION = "description";
+var SUMMARY = "summary";
+var PROJECT = "project";
+var POSSIBLE_TRANSITIONS = "possibleTransitions";
+var ASSIGNEE = "assignee";
+var KEY = "key";
+var ISSUE_TYPE = "issuetype";
+var TRANSITION = "transition"; 
+var ADD_COMMENT = "addComment";
+var POLL_TIMER_UID = "pollTimerUid";
+var JIRA_ISSUE = "jiraIssue";
+ 
+// Constants specific to custom property support
+var CUSTOM_FIELD_MAP = "customFieldMap";
+var CUSTOM_FIELD_ID = "id";
+var CUSTOM_FIELD_VALUE = "value"; 
+var CUSTOM_FIELD_PREFIX = "customfield_";
+
+// Custom issues
+var ISSUE_ADDITIONAL_UPDATES_REQUIRED = "issue.additional.updates.required";
+var ISSUE_TRANSITION_IN_PROGRESS = "issue.transition.in.progress";
+var ISSUE_ADD_COMMENT_IN_PROGRESS = "issue.add.comment.in.progress";
+
+// Custom event
+var EVENT_JIRA_ISSUE_UPDATE = "jira/2.0/event.jira.issue.update";
+var EVENT_UPDATE_PROPS_NAME = "changedProperties";
+/* jshint ignore: end */
+
+// =============================================================
+// Functions
+
+/**
+ * Simple equality comparison.
+ * @param {object} value
+ * @param {object} value
+ * @return {boolean} true if values are equal, false otherwise
+ */
+function valuesAreEqual(value1, value2) {
+    var value1Type =  Object.prototype.toString.call(value1);
+    var value2Type =  Object.prototype.toString.call(value2);
+
+    $.trace("Entering valuesAreEqual comparing '" + JSON.stringify(value1) + "'(" + value1Type +
+            ") and '" + JSON.stringify(value2) + "'(" + value2Type + ")");
+    var areEqual = false;
+
+    if (value1Type === value2Type) {
+        switch (value1Type) {
+            // compare 2 arrays - assumes no nested arrays
+            case "[object Array]":
+                $.trace("comparing 2 arrays");
+                areEqual = $.areSetsEqual(value1, value2);
+                break;
+            case "[object Object]":
+                 $.trace("comparing 2 objects");
+                 areEqual = $.areObjectsEqual(value1, value2);
+                break;
+            default:
+                $.trace("comparing values with '=='");
+                areEqual = value1 === value2; 
+        }
+    }
+            
+    $.trace("Exiting valuesAreEqual returning '" + areEqual + "'");
+    return areEqual;
+}
+
+/**
+ * Returns 'true' if the referenced name starts with Jira's "customfield" prefix,
+ * otherwise 'false'.
+ */
+function isJiraCustomFieldName(name) {
+    if (!name) {
+        return false;
+    }
+    
+    return name.startsWith(CUSTOM_FIELD_PREFIX) ? true : false;
+}
+
+/**
+ * Given a custom field name of (e.g.) customfield_12345, return
+ * just the numeric suffix part ("12345").
+ * 
+ * @param {string} name 
+ */
+function getIdNumber(name) {
+    if (!name.startsWith(CUSTOM_FIELD_PREFIX)) {
+        throw name + " must start with " + CUSTOM_FIELD_PREFIX;
+    }
+    
+    var id = name.substr(CUSTOM_FIELD_PREFIX.length);
+    
+    $.info("Return customField id: " + id);
+    return id;
+}
+
+/**
+ * Returns whether the specified 'value' is a string or number.
+ */
+function isStringOrNum(value) {
+
+    if (typeof value === "string" || typeof value  === "number") {
+        return true;
+    }
+        
+    return false;
+}
+
+/**
+ * Returns whether the specified value is an object.
+ */
+function isObject(value) {
+    if (value === null || value === undefined) {
+        return false;
+    }
+    
+    return Object.prototype.toString.call(value) === "[object Object]" ? true : false;
+}
+
+/**
+ * Returns whether the specified value is an object.
+ */
+function isArray(value) {
+    if (value === null || value === undefined) {
+        return false;
+    }
+    
+    return Object.prototype.toString.call(value) === "[object Array]" ? true : false;
+}
+
+/**
+ * Given the Jira custom field name, returns whether that field name
+ * has a mapping in our custom field definitions.  The field name must
+ * start with "customfield_".
+ */
+function customFieldDefined(resCustomFieldName) {
+    $.trace("Entering 'jiraIssue::common.customFieldDefined' with customfieldName: " + resCustomFieldName);
+
+    var customFieldMap = $this.getProperty(CUSTOM_FIELD_MAP);
+    if (!customFieldMap) {
+        $.trace("Exiting 'jiraIssue::common.customFieldDefined' - customFieldMap not defined");
+        return;
+    }
+    var id = getIdNumber(resCustomFieldName);
+    customFieldMap = JSON.parse(customFieldMap);
+    /* jshint forin: false */
+    for (var prop in customFieldMap) {
+        var propValue = customFieldMap[prop];
+        if (propValue.id && propValue.id === id) {
+            $.trace("Exiting 'jiraIssue::common.customFieldDefined' - found custom field: " + prop + " for id: " + id);
+            return true;
+        }
+    }
+    
+    $.trace("Exiting 'jiraIssue::common.customFieldDefined' - custom field not found for id: " + id);
+    return false;
+}
+
+/**
+ * Updates the specified customFieldMap entry as specified by 'resCustomFieldName'
+ * with the specified 'customFieldValue'.  If the entry exists and is updated, return
+ * 'true', else return 'false'.
+ */
+function updateCustomField(customFieldMap, resCustomFieldName, customFieldValue) {
+    $.trace("Entering 'jiraIssue::common.updateCustomField' with customfieldName: '" + resCustomFieldName + "' and value: '" + JSON.stringify(customFieldValue) + "'");
+
+    if (!customFieldMap) {
+        $.trace("Exiting 'jiraIssue::common.updateCustomField' - null customFieldMap");
+        return false;
+    }
+    
+    var id = getIdNumber(resCustomFieldName);
+    /* jshint forin: false */
+    for (var prop in customFieldMap) {
+        var propValue = customFieldMap[prop];
+        if (propValue.id && propValue.id === id) {
+            var fieldValue = propValue.value;
+// TODO - do more fine-grained checking here
+            if (!valuesAreEqual(fieldValue, customFieldValue)) {
+                propValue.value = customFieldValue;
+                $.trace("Exiting 'jiraIssue::common.updateCustomField' - found and updated custom field");
+                return true;
+            }
+            $.trace("Exiting 'jiraIssue::common.updateCustomField' - found field, but no changes");
+            return false;
+        }
+    }
+    
+    $.trace("Exiting 'jiraIssue::common.updateCustomField' - could not find custom field in map");
+    return false;
+}
+
+/**
+ * Returns whether the specified propName is defined in the customFieldMap.
+ */
+function isCustomField(propName) {
+    var customFieldMap = $this.getProperty(CUSTOM_FIELD_MAP);
+    
+    if (customFieldMap && customFieldMap[propName]) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Given a custom property field specification of (e.g.) "{"id" : 10040, "value": {...}}",
+ * returns the custom field name of "customfield_10040".
+ *
+ * @param {Object} customFieldValue Must not be null - must contain an "id" value.
+ * @returns {string} The custom field name.
+ */
+function extractCustomFieldName(customFieldValue) {
+    $.trace("Entering 'jiraIssue::common.extractCustomFieldName' with '" + JSON.stringify(customFieldValue) + "'");
+    
+    if (!customFieldValue || !isStringOrNum(customFieldValue[CUSTOM_FIELD_ID])) {
+        var errMsg = "Illegal state - null or illegal custom field value specification: " + customFieldValue;
+        $.error(errMsg);
+        throw errMsg;
+    }
+    var returnVal = CUSTOM_FIELD_PREFIX + customFieldValue[CUSTOM_FIELD_ID];
+    
+    $.trace("Exiting 'jiraIssue::common.extractCustomFieldName' with '" + returnVal + "'");
+    return returnVal;
+}
+
+/**
+ * Given a customfield object of "id/value" named properties, returns the
+ * the "value" value as a JSON object.
+ * 
+ * @param {Object} customFieldObj
+ * @returns {string} 
+ */
+function extractCustomFieldValue(customFieldObj) {
+    $.trace("Entering 'jiraIssue::common.extractCustomFieldValue' with '" + JSON.stringify(customFieldObj) + "'");
+    
+    if (!customFieldObj || customFieldObj[CUSTOM_FIELD_VALUE] === undefined) {
+        var errMsg = "Illegal state - missing custom field value specification: " + customFieldObj;
+        throw errMsg;
+    }
+    var returnVal = customFieldObj[CUSTOM_FIELD_VALUE];
+    
+    $.trace("Exiting 'jiraIssue::common.extractCustomFieldValue' with '" + JSON.stringify(returnVal) + "'");
+    return returnVal; 
+}
+
+/**
+ * Returns the customfield "value" associated to the specified fieldName.
+ *
+ * @param {string} The fieldName to search for in the custom field map.  May be
+ * null or undefined.
+ * @returns The value associated to fieldName, or null if there is no
+ * value.  Value is expected to be of the form { id: "number", value: {} } 
+ */
+function extractCustomField(fieldName) {
+    var returnVal = null;
+    var fieldMap = $this.getProperty(CUSTOM_FIELD_MAP);
+    if (fieldMap) {
+        fieldMap = JSON.parse(fieldMap);
+        if (fieldMap[fieldName] !== undefined) {
+            returnVal = fieldMap[fieldName];
+        }
+    }
+
+    return returnVal;
+}
+
+/**
+ * Given the specified name and value, returns an object of the form
+ * "{ id : <id>; value <value>}".
+ * 
+ * @param {string} id 
+ * @param {string} value 
+ */
+function buildCustomField(id, value) {
+    var retval = {};
+    retval[CUSTOM_FIELD_ID] = getIdNumber(id);
+    retval[CUSTOM_FIELD_VALUE] = value;
+    return retval;
+}
+
+/**
+ * Driven by the properties in the 'lhs' object, compare those property values
+ * against those in 'rhs' (if exist).  If all compare equal, objects are considered
+ * equal.  The functionality of only considering the lhs properties as the equality
+ * driver - it is not recursive.
+ *
+ * @param {Object} lhs The object with which to drive the comparison.
+ * @param {Object} rhs The object containing properties to compare against properties
+ * found in 'lhs'.
+ * 
+ * @return {boolean} 'true' if the referenced objects are equal as defined, 'false' if not.
+ */
+function objsEqual(lhs, rhs) {
+    var propNames = Object.keys(lhs);
+    /* jshint forin: false */
+    for (var ndx in propNames) {
+        var propName = propNames[ndx]; 
+        if (!valuesAreEqual(rhs[propName], lhs[propName])) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+/**
+ * For each property in 'target', see if there is a corresponding value in
+ * 'source', and if different, copy the source property value into target.
+ * 
+ * @param {Object} The target object whose properties are candidates for updates.
+ * @param {Object} The source object from which to compare property values to 'target'.
+ */
+function copyObj(target, source) {
+    $.trace("Entering 'jiraIssue::common.copyObj - target: '" + JSON.stringify(target) + "', source: '" + JSON.stringify(source) + "'");
+
+    Object.keys(target).forEach(function(prop) {
+        if (source[prop] && !valuesAreEqual(target[prop], source[prop])) {
+            $.debug("Copying '" + source[prop] + "' to '" + target[prop] + "'");
+            target[prop] = source[prop];
+        }
+    });
+    
+    $.trace("Exiting 'jiraIssue::common.copyObj - target: '" + JSON.stringify(target) + "'");
+}
+
+/**
+ * Returns the value of the "self" member of the specified 'value' object.
+ *
+ * @param value The object to test. May be <code>null</code> or <code>undefined</code>. 
+ *
+ * @returns The value of "self", or <code>null</code> if there is no member (or the
+ * member's value is null).
+ */
+function getSelf(value){
+    if(value && value.self){
+        return value.self;
+    } else {
+        return null;
+    }
+}
+
+/**
+ * Returns the resource associated to the '$this'.  If the resource is missing
+ * or an error occurred while retrieving the resource, an ISSUE_RESOURCE_MISSING
+ * is raised, and 'null' is returned.  Otherwise, the resourceRep for '$this' is
+ * returned.
+ *
+ * @param resLink The self-link to the resource to retrieve.
+ */    
+function getObjResource(resLink) {
+    $.trace("Entering 'jiraIssue::common.getObjResource' with: " + resLink);
+
+    /*
+     * If the resource is missing, or there's an error obtaining the resource
+     * raise an issue to that effect.
+     */
+    var resourceRep = null;
+    var resourceError = null;
+    try {
+        resourceRep = $.getResource(resLink);
+    } catch (error) {
+        resourceError = error;
+    }
+    
+    if (resourceError !== null || resourceRep === null) {
+        if (resourceError) {
+            $this.addIssueIfNotRaised("Resource could not be retrieved for this objective: jira.issue. Error: " + JSON.stringify(resourceError), GenesysIssues.ISSUE_RESOURCE_MISSING, "jiraIssue", "error");
+        }
+        else {
+            $this.addIssueIfNotRaised("Resource is missing on this objective: jira.issue", GenesysIssues.ISSUE_RESOURCE_MISSING, "jiraIssue", "warn");
+        }
+        $.warn("Error retrieving resource for '" + resLink + "' - " + JSON.stringify(resourceError));
+        $.trace("Exiting 'jiraIssue::common.getObjResource' - error retrieving resource");
+        return null;
+    }
+
+    /*
+     * In case previous resource requests failed...
+     */
+    $this.removeIssueIfRaised(GenesysIssues.ISSUE_RESOURCE_MISSING);
+    
+    $.trace("Exiting 'jiraIssue::common.getObjResource' - resource retrieved");
+    return resourceRep;
+}
+]]></common>
+  </businessLogic>
+  <events/>
+  <constituents/>
+  <interfaces/>
+  <transforms/>
+</obj:objectiveType>
