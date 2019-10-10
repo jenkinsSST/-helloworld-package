@@ -4,7 +4,5 @@
 test.PipelineBuild.buildPipelineBuilder(this)
                   .buildStratOSPipeline()
                   .withStratOSPackage('helloworldObjectivePackage', true)
-                  .withStratOSTests('helloworldObjectiveTests', 'JiraRealGearTestSuite', true)
-                  .withStratOSServer('2.5', '10.70.0.251', 'admin', 'admin')
-                  .djvbuild()
+                  .build()
                   .execute()
