@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Library('SeaStreetPipelineLibraryForTest') _
+@Library('SeaStreetPipelineLibrary') _
 test.PipelineBuild.buildPipelineBuilder(this)
                   .buildStratOSPipeline()
                   .withStratOSPackage('helloworldObjectivePackage', true)
