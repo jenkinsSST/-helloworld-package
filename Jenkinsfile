@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Library('SeaStreetPipelineLibrary@24592-use-only-one-node-for-execution') _
+@Library('SeaStreetPipelineLibrary') _
 test.PipelineBuild.buildPipelineBuilder(this)
                   .buildStratOSPipeline()
                   .withStratOSPackage('helloworldObjectivePackage', true)
