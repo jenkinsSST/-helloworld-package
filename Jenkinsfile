@@ -4,7 +4,7 @@
 
 @Library('devops-shared-lib-for-testing@mhyde-test-alterate-script-method') _
 
-test.PipelineBuild.buildPipelineBuilder(this)
+dtest.PipelineBuild.buildPipelineBuilder(this)
                   .buildStratOSPipeline()
                   .withStratOSPackage('helloworldObjectivePackage', true)
                   .build()
